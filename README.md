@@ -1,2 +1,2 @@
-# crickplays
-Cricket App
+# JPSC Score Calculator
+
