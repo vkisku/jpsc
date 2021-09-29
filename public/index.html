@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>JPSC Prelims Score Calculator</h1>
+    </div>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="sel1">Select Paper:</label>
+            <select class="form-control" id="sel1">
+                <option value="1">Paper 1</option>
+                <option value="2">Paper 2</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Select Series:</label>
+            <select class="form-control" id="sel1">
+                
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+                <option value="4">D</option>
+            </select>
+        </div>
+        <table class="table table-striped" id="answerTable">
+            <thead>
+                <tr>
+                    <th>Q. NO.</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+
+        <div class="text-center"><button type="button" id="submit" class="btn btn-success">Submit</button></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            tbodyGenerate();
+
+            
+            $btn=$('button#submit');
+            $btn.click(function(){
+                $selected=[];
+                for(i=0;i<100;i++){
+                    $selected[i]= $("input[name='optradio"+i+"']:checked").val()
+                }
+                console.log($selected);
+            });
+            
+            
+            function tbodyGenerate() {
+                $table = $('table#answerTable>tbody');
+                $content = "";
+                for (i = 0; i < 100; i++) {
+                    $content += '<tr>' +
+                        '<td>' + (i + 1) + '</td>' +
+                        '<td>' +
+                        '   <div class="form-check-inline">' +
+                        '      <label class="form-check-label">' +
+                        '         <input type="radio" class="form-check-input" value="1" name="optradio' + (i + 1) + '">1' +
+                        '    </label>' +
+                        ' </div>' +
+                        ' <div class="form-check-inline">' +
+                        '     <label class="form-check-label">' +
+                        '         <input type="radio" class="form-check-input" value="2" name="optradio' + (i + 1) + '">2' +
+                        '     </label>' +
+                        ' </div>' +
+                        ' <div class="form-check-inline disabled">' +
+                        '     <label class="form-check-label">' +
+                        '         <input type="radio" class="form-check-input" value="3" name="optradio' + (i + 1) + '" >3' +
+                        '     </label>' +
+                        ' </div>' +
+                        ' <div class="form-check-inline disabled">' +
+                        '     <label class="form-check-label">' +
+                        '         <input type="radio" class="form-check-input" value="4" name="optradio' + (i + 1) + '" >4' +
+                        '     </label>' +
+                        ' </div>' +
+                        '</td>' +
+                        '</tr >';
+                }
+                $table.append($content);
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

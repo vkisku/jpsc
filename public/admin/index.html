@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>JPSC Answer Key</h1>
+        <p>Admin Panel</p>
+    </div>
+
+    <div class="container">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPaperModal">+ Add
+            Paper</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addSeriesModal">+ Add
+            Series</button>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>SL. NO.</th>
+                    <th>Series Name</th>
+                    <th>Add Answer Key</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Doe</td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myLargeModal">+
+                            Add Series</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Moe</td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myLargeModal">+
+                            Add Series</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal" id="addPaperModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Paper</h4>
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" placeholder="Add Paper Name" class="form-control" id="series">
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="seriesAddBtn" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addSeriesModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Series</h4>
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="sel1">Select Paper:</label>
+                        <select class="form-control" id="sel1">
+                            <option value="1">Paper 1</option>
+                            <option value="2">Paper 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Add Series Name" class="form-control" id="series">
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myLargeModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Answer
+                    </h4>
+
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="sel1">Select Paper:</label>
+                        <select class="form-control" id="sel1">
+                            <option value="1">Paper 1</option>
+                            <option value="2">Paper 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Select Series:</label>
+                        <select class="form-control" id="sel1">
+
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">C</option>
+                            <option value="4">D</option>
+                        </select>
+                    </div>
+                    <table class="table table-striped" id="answerKey">
+                        <thead>
+                            <tr>
+                                <th>Q.No.</th>
+                                <th>Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-success">Submit</button>
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+
+            $('button#seriesAddBtn').click(function () {
+                $input = $('input#series').val();
+                console.log($input);
+
+                $.ajax(
+                    {
+                        url: "/paper/register",
+                        success: function (data) {
+                            console.log(data);
+
+                        }
+                    });
+            });
+
+            generateTable();
+
+
+
+
+            function generateTable() {
+                $noOfquestions = 100;
+
+                $table = $('table#answerKey>tbody');
+
+                $content = "";
+                for (i = 0; i < $noOfquestions; i++) {
+                    $radio = 'answer' + i;
+                    $dropdown = '<div class="form-check-inline">' +
+                        '<label class="form-check-label">' +
+                        '<input type="radio" class="form-check-input" name="' + $radio + '">' +
+                        '1' +
+                        '</label>' +
+                        '</div>' +
+                        '<div class="form-check-inline">' +
+                        '<label class="form-check-label">' +
+                        '<input type="radio" class="form-check-input" name="' + $radio + '">2' +
+                        '</label>' +
+                        '</div>' +
+                        '<div class="form-check-inline disabled">' +
+                        '<label class="form-check-label">' +
+                        '<input type="radio" class="form-check-input" name="' + $radio + '" >3' +
+                        '</label>' +
+                        '</div>' +
+                        '<div class="form-check-inline disabled">' +
+                        '<label class="form-check-label">' +
+                        '<input type="radio" class="form-check-input" name="' + $radio + '" >4' +
+                        '</label>' +
+                        '</div>';
+                    $content += "<tr>" +
+                        "<td>" + (i + 1) + "</td>" +
+                        "<td>" + $dropdown + "</td>" +
+                        "</tr>";
+                }
+                $table.append($content);
+
+            }
+        });
+    </script>
+</body>
+
+</html>
